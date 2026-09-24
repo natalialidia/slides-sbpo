@@ -8,7 +8,8 @@
 \beamer@subsectionintoc {3}{1}{Definição\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 7}{12}{0}{3}
 \beamer@sectionintoc {4}{Desigualdades de cliques particionáveis\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 8}{13}{0}{4}
 \beamer@subsectionintoc {4}{1}{Desigualdades\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 8}{13}{0}{4}
-\beamer@sectionintoc {5}{Experimentos computacionais\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 9}{16}{0}{5}
-\beamer@subsectionintoc {5}{1}{Algoritmo branch-and-cut\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 9}{16}{0}{5}
-\beamer@subsectionintoc {5}{2}{Ambiente e instâncias\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 10}{21}{0}{5}
-\beamer@subsectionintoc {5}{3}{Resultados\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 11}{23}{0}{5}
+\beamer@subsectionintoc {4}{2}{Exemplo\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 9}{16}{0}{4}
+\beamer@sectionintoc {5}{Experimentos computacionais\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 10}{18}{0}{5}
+\beamer@subsectionintoc {5}{1}{Algoritmo branch-and-cut\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 10}{18}{0}{5}
+\beamer@subsectionintoc {5}{2}{Ambiente e instâncias\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 11}{23}{0}{5}
+\beamer@subsectionintoc {5}{3}{Resultados\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 12}{24}{0}{5}

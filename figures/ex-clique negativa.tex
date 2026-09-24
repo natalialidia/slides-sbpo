@@ -1,0 +1,50 @@
+% \input{figuras/tikz/preamble}
+\begin{tikzpicture}
+	\pgfsetlinewidth{1pt}
+
+    % Optional: draw a dotted ellipse to show partition groups
+    % \node[text=black] (S) at (0, 1.5) {$S$};
+    % \filldraw[fill=white, draw=black, thick] (1.1,0) ellipse (1.5 and 1.5);
+    % \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (3,0) ellipse (1 and 1.6);
+    
+    % Partition A (single vertex)
+    \node[vertex] (A1) at (0,0.8) {};
+    \node[vertex] (A2) at (0,-0.8) {};
+
+    \only<2>{
+        \node[vertex,c1] (A1) at (0,0.8) {};
+        \node[vertex,gray] (A2) at (0,-0.8) {};
+    }
+
+    \draw[draw] (A1) -- node [label, midway, left] {--} (A2);
+    
+    % Partition B (rest of the clique)
+
+    \node[vertex] (B2) at (2.2,0.8) {};
+    \node[vertex] (B4) at (2.2,-0.8) {};
+
+    \only<2>{
+        \node[vertex,c1] (B2) at (2.2,0.8) {};
+        \node[vertex,gray] (B4) at (2.2,-0.8) {};
+    }
+    
+    % Connect partition A to all B nodes
+    \draw (A1) -- node [label, midway, above] {--} (B4);
+    \draw (A2) -- node [label, midway, below] {--} (B2);
+    
+    \only<1>{
+        \draw (A1) -- node [label, midway, above] {--} (B2);
+        \draw (A2) -- node [label, midway, below] {--} (B4);
+    }
+    \only<2>{
+        \draw (A1)[c2,dashed] -- node [label, midway, above] {--} (B2);
+        \draw (A2)[c2,dashed] -- node [label, midway, below] {--} (B4);
+    }
+    
+    % Connect all B nodes to each other (complete graph)
+    \foreach \i/\j in {2/4} {
+        \draw[draw] (B\i) -- node [label, midway, right] {--} (B\j);
+    }
+    
+    
+\end{tikzpicture}

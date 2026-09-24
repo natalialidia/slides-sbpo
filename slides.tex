@@ -222,6 +222,30 @@
     
 \end{frame}
 
+\subsection{Exemplo}
+\begin{frame}
+    
+Exemplo: $k=4$.
+
+\begin{itemize}
+    \item $S = V(K), \bar{S} = \emptyset$: 
+        \begin{equation}
+            {\only<2>{\color{c1}}-\sum_{u \in V(K)}x_u} + {\only<2>{\color{c2}} \sum_{e \in E(K)}y_e} \geq 0 
+        \end{equation}
+    \item $S = \emptyset, \bar{S} = V(K)$:
+        \begin{equation}
+            {\only<2>{\color{c1}}\sum_{u \in V(K)}x_u} + {\only<2>{\color{c2}} \sum_{e \in E(K)}y_e} \geq 4
+        \end{equation}
+\end{itemize}
+
+\begin{minipage}[h][10em][c]{\textwidth}
+    \centering%
+    \input{figures/ex-clique negativa.tex}
+    \captionof{figure}{\footnotesize Clique negativa.}
+\end{minipage}
+
+\end{frame}
+
 \section{Experimentos computacionais}
 
 \subsection{Algoritmo branch-and-cut}
@@ -257,8 +281,6 @@
         \end{itemize}
     \end{block}
 
-    \pause
-
     \begin{block}{Instâncias}
         \begin{itemize}
             \item Instâncias aleatórias com parâmetros $n \in \{100,200\}$, $d \in \{30\%, 50\%, 70\%\}$, $p \in \{25\%, 50\%, 75\%\}$.
@@ -268,16 +290,6 @@
 \end{frame}
 
 \subsection{Resultados}
-
-\begin{frame}
-
-    \begin{figure}[h]
-        \includegraphics[width=\textwidth]{figures/gap_relaxacao.png}
-        \captionof{figure}{Resultados das instâncias de 100 e 200 vértices.}
-        \label{fig:figure2}
-    \end{figure}
-    
-\end{frame}
 
 \begin{frame}
 
@@ -374,6 +386,95 @@
 
 \begin{frame}[allowframebreaks]{Referências}
     \printbibliography
+\end{frame}
+
+\begin{frame}
+
+    \begin{figure}[h]
+        \includegraphics[width=\textwidth]{figures/gap_relaxacao.png}
+        \captionof{figure}{Resultados das instâncias de 100 e 200 vértices.}
+        \label{fig:figure2}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}[allowframebreaks] 
+    
+    {\scriptsize
+    \renewcommand{\arraystretch}{0.9}  % valores < 1 diminuem o espaço
+    \setlength{\tabcolsep}{3pt}  % padrão é 6pt
+    \begin{longtable}{l|c|rr|rr|rr|rr|rr|rr}
+    \caption{Resultados para instâncias sintéticas com 100 e 200 vértices.}
+    \label{tab:sint-100-200}\\
+    \hline
+    \multirow{2}{*}{$(n,d,p)$} & \multirow{2}{*}{i} & \multicolumn{2}{c|}{BASE} & \multicolumn{2}{c|}{NC} & \multicolumn{2}{c|}{NC+K4} & \multicolumn{2}{c|}{TRI} & \multicolumn{2}{c|}{TRI+NC} & \multicolumn{2}{c}{TRI+NC+K4} \\
+    & &Tempo & Gap  & Tempo & Gap & Tempo & Gap & Tempo & Gap & Tempo & Gap & Tempo & Gap \\
+    \hline
+    \endfirsthead
+
+    \multicolumn{14}{c}%
+    {\tablename\ \thetable\ -- continuação da página anterior} \\
+    \hline
+    \multirow{2}{*}{$(n,d,p)$} & \multirow{2}{*}{i} & \multicolumn{2}{c|}{BASE} & \multicolumn{2}{c|}{NC} & \multicolumn{2}{c|}{NC+K4} & \multicolumn{2}{c|}{TRI} & \multicolumn{2}{c|}{TRI+NC} & \multicolumn{2}{c}{TRI+NC+K4} \\
+    & & Tempo & Gap & Tempo & Gap & Tempo & Gap & Tempo & Gap & Tempo & Gap & Tempo & Gap \\
+    \hline
+    \endhead
+
+    \hline
+    \multicolumn{14}{r}{continua na próxima página} \\
+    \endfoot
+
+    \hline
+    \endlastfoot
+    & 1 & TL & 22,37 & 0,10 & -- & 0,22 & -- & 0,13 & -- & \textbf{0,07} & -- & 0,08 & -- \\
+    (100, 30\%, 25\%) & 2 & TL & 28,23 & 0,96 & -- & 1,60 & -- & \textbf{0,14} & -- & 0,17 & -- & 0,23 & -- \\
+    & 3 & TL & 19,47 & \textbf{0,03} & -- & 0,12 & -- & 0,07 & -- & 0,07 & -- & 0,07 & -- \\
+    \hline
+    & 1 & TL & 45,57 & TM & 15,87 & TL & 15,67 & TL & 6,84 & TL & 6,05 & TL & \textbf{5,93} \\
+    (100, 30\%, 50\%) & 2 & TL & 50,46 & TM & 17,71 & TL & 15,44 & TL & 7,48 & TL & 6,95 & TL & \textbf{6,55} \\
+    & 3 & TL & 50,88 & TM & 18,01 & TL & 15,95 & TL & \textbf{7,15} & TL & 7,26 & TL & 7,51 \\
+    \hline
+    & 1 & TL & 49,81 & TM & 17,68 & TL & 14,94 & TL & 6,91 & TL & \textbf{6,39} & TL & 6,58 \\
+    (100, 30\%, 75\%) & 2 & TL & 51,27 & TM & 18,25 & TL & 16,73 & TL & 6,54 & TL & 5,80 & TL & \textbf{5,65} \\
+    & 3 & TL & 50,09 & TM & 18,11 & TL & 16,70 & TL & 7,68 & TL & 7,38 & TL & \textbf{6,78} \\
+    \hline
+    & 1 & TL & 25,76 & 0,29 & -- & 1,07 & -- & \textbf{0,06} & -- & 0,13 & -- & 0,18 & -- \\
+    (100, 50\%, 25\%) & 2 & TL & 31,85 & 0,12 & -- & 1,04 & -- & \textbf{0,08} & -- & 0,10 & -- & 0,12 & -- \\
+    & 3 & TL & 35,70 & 0,59 & -- & 1,68 & -- & \textbf{0,11} & -- & 0,17 & -- & 0,19 & -- \\
+    \hline
+    & 1 & TL & 61,04 & TM & 23,01 & TL & 19,63 & TL & 12,64 & TL & 12,82 & TL & \textbf{11,35} \\
+    (100, 50\%, 50\%) & 2 & TL & 60,79 &TL & 21,73 & TL & 18,78 & TL & 11,31 & TL & 11,93 & TL & \textbf{11,09} \\
+    & 3 & TL & 60,76 & TL & 22,08 & TL & 18,83 & TL & 11,91 & TL & 12,68 & TL & \textbf{11,63} \\
+    \hline
+    & 1 & TL & 60,73 & TM & 20,90 & TL & 18,22 & TL & 12,09 & TL & 12,04 & TL & \textbf{11,86} \\
+    (100, 50\%, 75\%) & 2 & TL & 60,90 & TM & 21,43 & TL & 17,53 & TL & 12,01 & TL & 13,23 & TL & \textbf{10,54} \\
+    & 3 & TL & 61,27 & TM & 20,78 & TL & 17,55 & TL & 12,47 & TL & 13,05 & TL & \textbf{11,52} \\
+    \hline
+    & 1 & TL & 38,89 & 0,22 & -- & 1,64 & -- & \textbf{0,12} & -- & 0,16 & -- & 0,30 & -- \\
+    (100, 70\%, 25\%) & 2 & TL & 39,50 &0,80 & -- & 3,65 & -- & \textbf{0,12} & -- & 0,26 & -- & 0,42 & -- \\
+    & 3 & TL & 39,52 & 0,45 & -- & 2,40 & -- & \textbf{0,13} & -- & 0,23 & -- & 0,41 & -- \\
+    \hline
+    & 1 &TL & 65,42 & TL & 22,68 & TL & 20,72 & TL & 16,09 & TL & 16,43 & TL & \textbf{15,10} \\
+    (100, 70\%, 50\%) & 2 & TL & 66,25 &TM & 24,25 & TL & 21,14 & TL & 17,43 & TL & 18,20 & TL & \textbf{16,41} \\
+    & 3 & TL & 64,86 & TL & 22,74 & TL & 20,01 & TL & 15,74 & TL & 16,99 & TL & \textbf{14,86} \\
+    \hline
+    & 1 & TL & 65,57 &TL & 23,73 & TL & 19,51 & TL & 16,44 & TL & 18,54 & TL & \textbf{16,38} \\
+    (100, 70\%, 75\%) & 2 & TL & 66,50 &TM & 24,65 & TL & 19,45 & TL & 16,98 & TL & 17,94 & TL & \textbf{16,14} \\
+    & 3 & TL & 65,60 &TM & 24,56 & TL & 20,29 & TL & 17,41 & TL & 18,29 & TL & \textbf{15,54} \\
+    \hline
+    & 1 & TL & 72,00 & 9,22 & -- & 50,06 & -- & \textbf{0,70} & -- & 0,95 & -- & 1,34 & -- \\
+    (200, 30\%, 25\%) & 2 & TL & 74,52 & 3,53 & -- & 16,76 & -- & \textbf{0,58} & -- & 0,78 & -- & 0,88 & -- \\
+    & 3 & TL & 72,65 & 2,85 & -- & 52,00 & -- & 0,81 & -- & \textbf{0,71} & -- & 0,91 & -- \\
+    \hline
+    & 1 & TL & 83,11 &TL & 30,36 & TL & 31,62 & TL & 19,84 & TL & \textbf{18,58} & TL & 19,20 \\
+    (200, 30\%, 50\%) & 2 & TL & 83,34 & TL & 30,66 & TL & 31,24 & TL & 19,98 & TL & 20,01 & TL & \textbf{18,99} \\
+    & 3 & TL & 83,61 & TM & 30,72 & TL & 31,44 & TL & 19,96 & TL & 20,09 & TL & \textbf{18,93} \\
+    \hline
+    & 1 & TL & 83,21 & TL & 31,67 & TL & 31,40 & TL & 19,74 & TL & 20,19 & TL & \textbf{19,41} \\
+    (200, 30\%, 75\%) & 2 & TL & 83,60 &TL & 30,78 & TL & 31,47 & TL & 19,80 & TL & 20,29 & TL & \textbf{19,13} \\
+    & 3 & TL & 83,61 & TL & 31,19 & TL & 31,72 & TL & 20,28 & TL & 20,48 & TL & \textbf{20,17} \\
+    \end{longtable}
+    }
 \end{frame}
 
 \end{document}
