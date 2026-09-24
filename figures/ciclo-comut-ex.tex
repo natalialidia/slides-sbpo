@@ -1,0 +1,211 @@
+  \begin{tikzpicture}[scale = 0.7, remember picture, overlay]
+    \pgfsetlinewidth{1pt}
+    % \tikzset{vertex/.style={circle, fill=black, minimum size=0.8em, inner sep=0.1em}};
+    \only<1>{
+        \begin{scope}[shift={(0,0)}]
+            {
+                \node[vertex] (c1) at (-1.5,1){};
+            }
+            {
+                \node[vertex] (c2) at (0,2){};
+            }
+            {
+                \node[vertex] (c3) at (1.5,1){};
+            }
+            {
+                \node[vertex] (c4) at (1.5,-1){};
+            }
+            {
+                \node[vertex] (c5) at (0,-2){};
+            }
+            {
+                \node[vertex] (c6) at (-1.5,-1){};
+            }
+            {
+                \draw (c1) edge node [label, midway, above] {--} (c2);
+                \draw (c2) edge node [label, midway, above] {--} (c3);
+                \draw (c3) edge node [label, midway, right] {--} (c4);
+                \draw (c4) edge node [label, midway, below] {--} (c5);
+                \draw (c5) edge node [label, midway, below] {--} (c6);
+                \draw (c6) edge node [label, midway, left] {+} (c1);
+            }
+        \end{scope}
+    }
+    \only<2-3>{
+        \begin{scope}[shift={(-4,0)}]
+            {
+                \node[vertex] (c1) at (-1.5,1){};
+            }
+            {
+                \node[vertex] (c2) at (0,2){};
+            }
+            {
+                \node[vertex] (c3) at (1.5,1){};
+            }
+            {
+                \node[vertex] (c4) at (1.5,-1){};
+            }
+            {
+                \node[vertex] (c5) at (0,-2){};
+            }
+            {
+                \node[vertex] (c6) at (-1.5,-1){};
+            }
+            {
+                \draw (c1) edge node [label, midway, above] {--} (c2);
+                \draw (c2) edge node [label, midway, above] {--} (c3);
+                \draw (c3) edge node [label, midway, right] {--} (c4);
+                \draw (c4) edge node [label, midway, below] {--} (c5);
+                \draw (c5) edge node [label, midway, below] {--} (c6);
+                \draw (c6) edge node [label, midway, left] {+} (c1);
+            }
+        \end{scope}
+    }
+    \only<2>{
+        \begin{scope}[shift={(4,0)}]
+            {
+                \node[vertex, draw=c2, minimum size=0.8em] (c1) at (-1.5,0){};
+            }
+            {
+                \node[vertex] (c2) at (0,2){};
+            }
+            {
+                \node[vertex] (c3) at (1.5,1){};
+            }
+            {
+                \node[vertex] (c4) at (1.5,-1){};
+            }
+            {
+                \node[vertex] (c5) at (0,-2){};
+            }
+            {
+                \draw (c1) edge node [label, midway, above] {--} (c2);
+                \draw (c2) edge node [label, midway, above] {--} (c3);
+                \draw (c3) edge node [label, midway, right] {--} (c4);
+                \draw (c4) edge node [label, midway, below] {--} (c5);
+                \draw (c5) edge node [label, midway, left] {--} (c1);
+            }
+        \end{scope}
+    }
+    \only<4-5>{
+        \begin{scope}[shift={(-4,0)}]
+            \filldraw[fill=white, draw=black, thick] (1.5,0) ellipse (0.6 and 1.4);
+            \filldraw[fill=white, draw=black, thick] (-1.5,0) ellipse (0.6 and 1.4);
+            {
+                \node[vertex] (c1) at (-1.5,1){};
+            }
+            {
+                \node[vertex] (c2) at (0,2){};
+            }
+            {
+                \node[vertex] (c3) at (1.5,1){};
+            }
+            {
+                \node[vertex] (c4) at (1.5,-1){};
+            }
+            {
+                \node[vertex] (c5) at (0,-2){};
+            }
+            {
+                \node[vertex] (c6) at (-1.5,-1){};
+            }
+            {
+                \draw (c1) edge node [label, midway, above] {--} (c2);
+                \draw (c2) edge node [label, midway, above] {--} (c3);
+                \draw (c3) edge node [label, midway, right] {--} (c4);
+                \draw (c4) edge node [label, midway, below] {--} (c5);
+                \draw (c5) edge node [label, midway, below] {--} (c6);
+                \draw (c6) edge node [label, midway, left] {+} (c1);
+            }
+        \end{scope}
+    }
+    \only<3-4>{
+        \begin{scope}[shift={(4,0)}]
+            \filldraw[fill=white, draw=black, thick] (1.5,0) ellipse (0.6 and 1.4);
+            \filldraw[fill=white, draw=black, thick] (-1.5,0) ellipse (0.6 and 0.6);
+            {
+                \node[vertex, draw=c2, minimum size=0.8em] (c1) at (-1.5,0){};
+            }
+            {
+                \node[vertex] (c2) at (0,2){};
+            }
+            {
+                \node[vertex] (c3) at (1.5,1){};
+            }
+            {
+                \node[vertex] (c4) at (1.5,-1){};
+            }
+            {
+                \node[vertex] (c5) at (0,-2){};
+            }
+            {
+                \draw (c1) edge node [label, midway, above] {--} (c2);
+                \draw (c2) edge node [label, midway, above] {--} (c3);
+                \draw (c3) edge node [label, midway, right] {--} (c4);
+                \draw (c4) edge node [label, midway, below] {--} (c5);
+                \draw (c5) edge node [label, midway, left] {--} (c1);
+            }
+        \end{scope}
+    }
+    \only<5-6>{
+        \begin{scope}[shift={(4,0)}]
+            \filldraw[fill=white, draw=black, thick] (1.5,0) ellipse (0.6 and 1.4);
+            \filldraw[fill=white, draw=black, thick] (-1.5,0) ellipse (0.6 and 0.6);
+            {
+                \node[vertex, draw=c2, minimum size=0.8em] (c1) at (-1.5,0){};
+            }
+            {
+                \node[vertex] (c2) at (0,2){};
+            }
+            {
+                \node[vertex] (c3) at (1.5,1){};
+            }
+            {
+                \node[vertex] (c4) at (1.5,-1){};
+            }
+            {
+                \node[vertex] (c5) at (0,-2){};
+            }
+            {
+                \draw[c2] (c1) edge node [label, midway, above] {+} (c2);
+                \draw[c2] (c2) edge node [label, midway, above] {+} (c3);
+                \draw (c3) edge node [label, midway, right] {--} (c4);
+                \draw[c2] (c4) edge node [label, midway, below] {+} (c5);
+                \draw[c2] (c5) edge node [label, midway, left] {+} (c1);
+            }
+        \end{scope}
+    }
+    \only<6>{
+        \begin{scope}[shift={(-4,0)}]
+            \filldraw[fill=white, draw=black, thick] (1.5,0) ellipse (0.6 and 1.4);
+            \filldraw[fill=white, draw=black, thick] (-1.5,0) ellipse (0.6 and 1.4);
+            {
+                \node[vertex] (c1) at (-1.5,1){};
+            }
+            {
+                \node[vertex] (c2) at (0,2){};
+            }
+            {
+                \node[vertex] (c3) at (1.5,1){};
+            }
+            {
+                \node[vertex] (c4) at (1.5,-1){};
+            }
+            {
+                \node[vertex] (c5) at (0,-2){};
+            }
+            {
+                \node[vertex] (c6) at (-1.5,-1){};
+            }
+            {
+                \draw[c2] (c1) edge node [label, midway, above] {+} (c2);
+                \draw[c2] (c2) edge node [label, midway, above] {+} (c3);
+                \draw (c3) edge node [label, midway, right] {--} (c4);
+                \draw[c2] (c4) edge node [label, midway, below] {+} (c5);
+                \draw[c2] (c5) edge node [label, midway, below] {+} (c6);
+                \draw (c6) edge node [label, midway, left] {+} (c1);
+            }
+        \end{scope}
+    }
+    
+\end{tikzpicture}

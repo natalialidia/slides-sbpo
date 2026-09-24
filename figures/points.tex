@@ -1,0 +1,65 @@
+% \input{figuras/tikz/preamble}
+\begin{tikzpicture}[scale=0.6, draw=black, color=black]
+	\pgfsetlinewidth{1pt}
+
+    \begin{scope}[shift={(-7,0)}]
+    
+        % Optional: draw a dotted ellipse to show partition groups
+        \filldraw[fill=blue!30, draw=blue!90, dashed, rounded corners] (-0.8,-0.8) rectangle (0.8,0.8);
+        \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (1.4,-1.2) rectangle (3.4,1.2);
+        
+        % Partition A (single vertex)
+        \node[vertex, label=above:$u$] (A) at (0,0) {};
+        
+        % Partition B (rest of the clique)
+        \node[vertex, label=right:$v$] (B1) at (2,0.75) {};
+        \node[vertex] (B2) at (3,0) {};
+        \node[vertex] (B3) at (2,-0.75) {};
+        % \node[vertex] (B4) at (2,-1) {};
+        
+        % Connect partition A to all B nodes
+        \foreach \i in {1,2,3} {
+            \draw (A) -- (B\i);
+        }
+        
+        % Connect all B nodes to each other (complete graph)
+        \foreach \i/\j in {1/2,1/3,2/3} {
+            \draw[dashed] (B\i) -- (B\j);
+        }
+        
+    \end{scope}
+
+    % Picture in Quadrant II
+    \begin{scope}[shift={(-1,0)}]
+        % Optional: draw a dotted ellipse to show partition groups
+        \filldraw[fill=blue!30, draw=blue!90, dashed, rounded corners] (-0.8,-0.8) rectangle (0.8,0.8);
+        \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (1.8,-0.8) rectangle (3.4,0.8);
+        
+        % Partition A (single vertex)
+        \node[vertex, label=left:$u$] (A1) at (0,0.5) {};
+        \node[vertex, label=left:$v$] (A2) at (0,-0.5) {};
+
+        \draw[dashed] (A1) -- (A2);
+        
+        % Partition B (rest of the clique)
+        \node[vertex] (B2) at (2.5,0.5) {};
+        \node[vertex] (B3) at (2.5,-0.5) {};
+        % \node[vertex] (B4) at (2,-1) {};
+        
+        % Connect partition A to all B nodes
+        \foreach \i in {2,3} {
+            \draw (A1) -- (B\i);
+        }
+
+        \foreach \i in {2,3} {
+            \draw[draw] (A2) -- (B\i);
+        }
+        
+        % Connect all B nodes to each other (complete graph)
+        \foreach \i/\j in {2/3} {
+            \draw[dashed] (B\i) -- (B\j);
+        }
+    \end{scope}
+    
+    
+\end{tikzpicture}

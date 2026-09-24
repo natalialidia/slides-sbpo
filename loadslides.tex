@@ -1,0 +1,252 @@
+
+% Copyright (c) 2022 by Lars Spreng
+% This work is licensed under the Creative Commons Attribution 4.0 International License. 
+% To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Add your packages and commands to this file
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Fonts
+% \RequirePackage{palatino} % for serif slides
+% \usefonttheme{serif}
+\RequirePackage[scaled]{helvet} % for sans-serif slides
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+
+
+\usepackage{styles/elegantmacros}
+\usefolder{styles}
+\usetheme[style=red]{elegant}
+
+\newcommand{\makepart}[1]{ % For convenience
+\part{#1} \frame{\partpage}
+}
+
+\usepackage{setspace}
+\renewcommand{\baselinestretch}{1.125} 
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Figures
+\RequirePackage{booktabs}
+\RequirePackage{colortbl}
+\RequirePackage{ragged2e}
+\RequirePackage{schemabloc}
+%\RequirePackage{natbib}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{multirow}
+\RequirePackage[%
+  natbib=true, backend=biber,%
+  style=apa, isbn=false,url=false,uniquename=false%, useprefix=true%
+  ]{biblatex}
+\addbibresource{references.bib}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Figures
+\RequirePackage{wrapfig}
+\RequirePackage{pgfplots}
+\RequirePackage{graphicx}
+\RequirePackage{adjustbox}
+\RequirePackage{environ}
+\pgfplotsset{compat=1.18}
+
+\makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+  \def\tikz@width{#1}%
+  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+  \BODY
+  \end{lrbox}%
+  \pgfmathparse{#1/\wd\measure@tikzpicture}%
+  \edef\tikzscale{\pgfmathresult}%
+  \BODY
+}
+\makeatother
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Maths 
+\RequirePackage{textcomp}
+\RequirePackage{amsmath} 
+\RequirePackage{amsthm}
+\RequirePackage{mathtools}
+%\RequirePackage{bbm}
+%\RequirePackage{algorithm}
+%\RequirePackage[osf,sc]{mathpazo}
+%\RequirePackage{pifont}
+%\newcommand{\xmark}{\ding{55}}%
+%\numberwithin{equation}{section}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\setbeamertemplate{theorems}[numbered] % to number
+
+\theoremstyle{definition}
+\newtheorem{fact}{Fact}[section]
+\newtheorem{examp}{Exemplo}[section]
+
+\theoremstyle{plain}
+\newtheorem{definition}{Definição}[section]
+\newtheorem{proposition}{Proposição}
+\newtheorem{theorem}{Teorema}
+\newtheorem{cor}{Corolário}
+\newtheorem{assumption}{Assumption}
+
+\providecommand{\H}{\mathscr{H}}      
+\providecommand{\E}{\mathbb{E}}
+\makeatletter
+\def\munderbar#1{\underline{\sbox\tw@{$#1$}\dp\tw@\z@\box\tw@}}
+\makeatother
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Costumização
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{xparse}
+\usepackage{xifthen}
+\usepackage{xstring}
+\usepackage{etoolbox} % needed for \IfEqCase
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows.meta}
+
+\addtobeamertemplate{title page}{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=south east,xshift=-1cm,yshift=0.5cm]
+      at (current page.south east)
+      {\includegraphics[height=.5cm]{figures/pargo.png}};
+  \end{tikzpicture}
+}{}
+
+\setbeamercolor{title}{bg=}
+\setbeamercolor{author}{bg=}
+\setbeamercolor{institute}{bg=}
+\setbeamercolor{date}{bg=}
+
+\definecolor{c0}{rgb}{1.00, 1.00, 1.00} % branco
+\definecolor{c1}{rgb}{0.20, 0.40, 0.80} % azul
+\definecolor{c2}{rgb}{0.90, 0.20, 0.10} % vermelho
+\definecolor{c3}{rgb}{1.00, 0.60, 0.00} % amarelo
+\definecolor{c4}{rgb}{0, 0.61, 0.29}
+% 
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations}
+
+\tikzstyle{every node}=[shape=circle, minimum size=.4em, inner sep=0.1em]
+\tikzstyle{vertex}=[circle, draw=black, minimum size=0.4em, fill=black, inner sep=0.1em]
+% \tikzstyle{label}=[fill=none]
+\tikzstyle{positive}=[dashed]
+\tikzset{parallel/.style={auto=right,
+		to path={ let \p1=(\tikztostart),\p2=(\tikztotarget),
+			\n1={atan2(\y2-\y1,\x2-\x1)},\n2={\n1+180}
+			in ($(\tikztostart.{\n1})!.1em!270:(\tikztotarget.{\n2})$) -- 
+			($(\tikztotarget.{\n2})!.1em!90:(\tikztostart.{\n1})$) \tikztonodes}}}
+\tikzset{
+  node_alert/.style={circle,draw, color=c3, line width=1.5pt, opacity=0.6, minimum size=13pt, scale=0.6, inner sep=0.5pt},
+  alert_red/.style={circle,draw, color=c2, line width=1.5pt, opacity=0.6, minimum size=13pt, scale=0.6, inner sep=0.5pt},
+  % label/.style={draw=none},
+  edge/.style = {->, line width=0.02cm},
+  edgeb/.style = {->, line width=0.05cm},
+  edge1/.style = {rounded corners, c3, opacity=0.6, line width=3pt},
+  edge2/.style = {rounded corners, c1, opacity=0.6, line width=3pt},
+}
+%%%% para fazer "animações"
+\tikzset{
+    invisible/.style={opacity=0,text opacity=0},
+    visible on/.style={alt=#1{}{invisible}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+}
+
+\renewcommand{\figurename}{\footnotesize Fig}
+\newtheorem{problem}{Problema}
+\newtheorem{lemma}{Lema}
+\newtheorem{prop}{Proposição}
+
+\newcommand{\Problem}[3]{
+	\begin{block}{{\scshape #1}}
+		{\bfseries Entrada:} #2\\
+		{\bfseries Objetivo:} #3
+	\end{block}%
+}
+
+\newcommand{\fakepart}[1]{
+  \section{}
+  \begin{frame}
+    \centering
+    \vfill
+    {\LARGE\emphasize{#1}}
+    \vfill
+  \end{frame}
+}
+
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\Px}{\mathbf{P}}
+\newcommand{\PxK}{\mathbf{P}(K)}
+\newcommand{\Py}{\mathbf{P}'}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\PxG}{\mathbf{P}(G)}
+\newcommand{\PG}{{\mathcal{P}_G}}
+\newcommand{\PGn}{{\overline{\mathcal{P}}_G}}
+\newcommand{\Cn}{{\mathcal{C}^-}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\m}[1]{\mathbf{#1}}
+\newcommand{\tr}{\mathrm{t}}
+\newcommand{\cl}[1]{\mathcal{#1}}
+\newcommand{\Mcl}{\m{\mathit{M}}}
+\newcommand{\Mbcl}[1]{\m{\mathit{M}}(b(\cl{#1}))}
+\newcommand{\lpp}[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\cN}{\ensuremath{\mathcal{N}\!}}
+\newcommand{\cV}{\ensuremath{\mathcal{V}\!}}
+\newcommand{\tp}{{\top\!}}
+\newcommand{\e}{\mathbf{e}}
+
+\NewDocumentCommand{\Xvtx}{o m}{
+  % #1 = optional hat (if present)
+  % #2 = inner exponent (uvw)
+  \IfNoValueTF{#1}
+    {x^{{#2}}} % No accent
+    {%
+      \IfEqCase{#1}{
+        {hat}{\hat{x}^{{#2}}}
+        {bar}{\bar{x}^{{#2}}}
+        {tilde}{\tilde{x}^{{#2}}}
+        {dot}{\dot{x}^{{#2}}}
+        {dots}{\ddot{x}^{{#2}}}
+      }[\PackageError{nestedexp}{Unknown accent '#1'}{}]%
+    }
+}
+\NewDocumentCommand{\Yvtx}{o m}{
+  % #1 = optional hat (if present)
+  % #2 = inner exponent (uvw)
+  \IfNoValueTF{#1}
+    {y^{{#2}}} % No accent
+    {%
+      \IfEqCase{#1}{
+        {hat}{\hat{y}^{{#2}}}
+        {bar}{\bar{y}^{{#2}}}
+        {tilde}{\tilde{y}^{{#2}}}
+        {dot}{\dot{y}^{{#2}}}
+        {dots}{\ddot{y}^{{#2}}}
+      }[\PackageError{nestedexp}{Unknown accent '#1'}{}]%
+    }
+}

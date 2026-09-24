@@ -1,0 +1,57 @@
+% \input{figuras/tikz/preamble}
+\begin{tikzpicture}[scale = 0.9]
+	\pgfsetlinewidth{1pt}
+
+    \begin{scope}[shift={(-7,0)}]
+    
+        \filldraw[fill=blue!30, draw=blue!90, dashed, rounded corners] (-2.25,0) rectangle (-0.75,2);
+        \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (0.75,0) rectangle (2.25,2);
+
+        \node[vertex, label=left:$u$] (a) at (-1.5,1.5) {};
+        \node[vertex, label=left:$v$] (b) at (-1.5,0.5) {};
+        % \node[vertex] (c) at (-1.7,0.25) {};
+
+        \node[vertex] (d) at (1.7,1.75) {};
+        \node[vertex] (e) at (1.3,1.0) {};
+        \node[vertex] (f) at (1.7,0.25) {};
+
+        \draw (a) edge node [midway, right] {+} (b);
+        % \draw[dashed] (a) edge node [midway, left] {--} (c);
+        % \draw (b) edge node [midway, right] {+} (c);
+        \draw (d) edge node [midway, left] {+} (e);
+        \draw[dashed] (d) edge node [midway, right] {--} (f);
+        \draw (e) edge node [midway, left] {+} (f);
+
+        \draw (a) edge node [midway, above] {--} (d);
+        \draw[dashed] (b) edge node [midway, above] {+} (f);
+        % \draw (c) edge node [midway, above] {--} (f);
+        
+    \end{scope}
+
+    % Picture in Quadrant II
+    \begin{scope}[shift={(-1,0)}]
+        \filldraw[fill=blue!30, draw=blue!90, dashed, rounded corners] (-2.25,0) rectangle (-0.75,2);
+        \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (0.75,0) rectangle (2.25,2);
+
+        \node[vertex, label=right:$u$] (a) at (1.5,1.5) {};
+        \node[vertex, label=right:$v$] (b) at (1.5,0.5) {};
+        % \node[vertex] (c) at (-1.7,0.25) {};
+
+        \node[vertex] (d) at (-1.7,1.75) {};
+        \node[vertex] (e) at (-1.3,1.0) {};
+        \node[vertex] (f) at (-1.7,0.25) {};
+
+        \draw (a) edge node [midway, left] {+} (b);
+        % \draw[dashed] (a) edge node [midway, right] {--} (c);
+        % \draw (b) edge node [midway, right] {+} (c);
+        \draw (d) edge node [midway, right] {+} (e);
+        \draw[dashed] (d) edge node [midway, left] {--} (f);
+        \draw (e) edge node [midway, right] {+} (f);
+
+        \draw (a) edge node [midway, above] {--} (d);
+        \draw[dashed] (b) edge node [midway, above] {+} (f);
+        % \draw (c) edge node [midway, above] {--} (f);
+    \end{scope}
+    
+    
+\end{tikzpicture}

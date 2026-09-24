@@ -1,0 +1,10 @@
+\begin{definition}[\cite{harary1953notion}]
+		Um \textbf{grafo de sinais} é um grafo $G = (V, E, \sigma)$, em que $\sigma$ é uma função $\sigma: E \to \{+,-\}$.
+	\end{definition}
+	\begin{minipage}[h][12em][c]{\textwidth}
+		\centering%
+			\vspace{1em}
+		\input{figures/signed-graph-ex.tex}
+		\captionof{figure}{\footnotesize Grafo de sinais.}
+		\label{fig:bis-instance}
+	\end{minipage}

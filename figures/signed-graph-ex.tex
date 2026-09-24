@@ -1,0 +1,43 @@
+  \begin{tikzpicture}[scale = 0.8]
+    \pgfsetlinewidth{1pt}
+    % \tikzset{vertex/.style={circle, fill=black, minimum size=0.8em, inner sep=0.1em}};
+
+
+    \node[vertex] (c1) at (-3,0){};
+
+    \node[vertex] (c2) at (-1,1){};
+
+    \node[vertex] (c3) at (-1,-1){};
+
+    \node[vertex] (c4) at (1,1){};
+
+    \node[vertex] (c5) at (3,0){};
+
+    \node[vertex] (c6) at (1,-1){};
+
+
+	{
+        \draw (c1) -- (c2) node [label, midway, above left] {--};
+        \draw (c2) -- (c3) node [label, midway, right] {--};
+        \draw (c3) -- (c1) node [label, midway, below] {+};
+        
+        \draw (c3) -- (c4) node [label, midway, above left] {+};
+        
+        \draw (c4) -- node [label, midway, above right] {+} (c5);
+        \draw (c5) -- node [label, midway, below right] {--} (c6);
+        \draw (c6) -- node [label, midway, below left] {+} (c4);
+	}
+
+	% \only<2->{
+	% \draw (c1) edge[c2] node [label, midway, above left] {--} (c2);
+	% \draw (c2) edge[c2] node [label, midway, right] {--} (c3);
+	% \draw (c3) edge[c1]  node [label, midway, below] {+} (c1);
+
+  %   \draw (c3) edge[c1] node [label, midway, above left] {+} (c4);
+
+  %   \draw (c4) edge[c1] node [label, midway, above right] {+} (c5);
+  %   \draw (c5) edge[c2] node [label, midway, below right] {--} (c6);
+  %   \draw (c6) edge[c1] node [label, midway, below left] {+} (c4);
+	% }
+
+  \end{tikzpicture}

@@ -1,0 +1,379 @@
+% Copyright (c) 2022 by Lars Spreng
+% This work is licensed under the Creative Commons Attribution 4.0 International License. 
+% To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% You can add your packages and commands to the loadslides.tex file. 
+% The files in the folder "styles" can be modified to change the layout and design of your slides.
+% I have included examples on how to use the template below. 
+% Some of these examples are taken from the Metropolis template.
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+\documentclass[
+12pt,notheorems,hyperref={pdfauthor=whatever}
+]{beamer}
+
+\input{loadslides.tex} % Loads packages and some defined commands
+
+\title[
+   Problema do Subgrafo Gerador Balanceado Máximo:\\desigualdades válidas e estratégias de branch-and-cut
+]{Problema do Subgrafo Gerador Balanceado Máximo:\\desigualdades válidas e estratégias de branch-and-cut}
+
+\author[
+% Text entered here will appear in the bottom left corner
+]{
+    Natália Coelho, Manoel Campêlo
+}
+
+\institute{
+    Universidade Federal do Ceará}
+\date{Julho, 2026}
+
+\begin{document}
+
+% Generate title page
+{
+\setbeamertemplate{footline}{} 
+\begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+    \node[
+        opacity=0.1,
+        inner sep=0pt
+    ] at (current page.center)
+    {\includegraphics[width=0.9\paperwidth]{figures/capa-ufc.png}};
+    \end{tikzpicture}
+
+  \titlepage
+\end{frame}
+}
+\addtocounter{framenumber}{-1}
+
+% You can declare different parts as a parentof sections
+% \begin{frame}[allowframebreaks]{Sumário}
+%     \tableofcontents
+% \end{frame}
+
+\section{Introdução}
+
+\subsection{Definições preliminares}
+\begin{frame}[fragile]
+	\begin{definition}[\cite{harary1953notion}]
+		Um \textbf{grafo de sinais} é um grafo $G = (V, E, \sigma)$, em que $\sigma$ é uma função $\sigma: E \to \{+,-\}$.
+	\end{definition}
+	\begin{minipage}[h][12em][c]{\textwidth}
+		\centering%
+			\vspace{1em}
+		\input{figures/signed-graph-ex.tex}
+		\captionof{figure}{\footnotesize Grafo de sinais.}
+		\label{fig:bis-instance}
+	\end{minipage}
+\end{frame}
+\begin{frame}
+    \begin{definition}[\cite{harary1953notion}]
+		Um grafo de sinais é dito \textbf{balanceado} se $V$ pode ser particionado em dois conjuntos $S \subseteq V$ e $\bar{S} = V \backslash S$, de forma que: 
+        \begin{center}
+            $E^+ = E(S) \cup E(\bar{S})$ e $E^- = \delta(S)$
+        \end{center}
+	\end{definition}
+	\begin{minipage}[h][12em][c]{\textwidth}
+		\centering%
+		\input{figures/bal-ex.tex}
+        \captionof{figure}{\footnotesize Grafo de sinais balanceado.}
+	\end{minipage}
+\end{frame}
+\begin{frame}
+    \begin{definition}
+        Um ciclo em um grafo de sinais é chamado de \textbf{\textit{ciclo negativo}} se possuir um número \textbf{ímpar} de arestas negativas.
+    \end{definition}
+    % \vspace{2em}
+    \begin{minipage}[h][10em][c]{\textwidth}
+		\centering%
+		\input{figures/ex-ciclo-neg}
+        \vspace{2em}
+		\small{\captionof{figure}{\footnotesize Ciclo negativo.}}
+	\end{minipage}
+    \vspace{-2.5em}
+    \pause
+    \begin{theorem}[\cite{cartwright1956structural}]\label{teo:neg-cycle}
+        Um grafo de sinais é balanceado se, e somente se, não possuir ciclos negativos.
+    \end{theorem}
+\end{frame}
+
+\subsection{Definição do problema}
+\begin{frame}
+    \textsc{\textbf{\color{primary} Subgrafo Gerador Balanceado Máximo (MBSS)}}.
+    \vspace{0.25em}
+
+    {\itshape
+    \noindent\textbf{Entrada:} Um grafo de sinais $G=(V,E, \sigma)$.
+
+    \noindent\textbf{Objetivo:} Encontrar um subconjunto de arestas $E' \subseteq E$, de tamanho máximo, que gera um subgrafo balanceado.}
+
+    \pause
+    \vspace{1em}
+    \begin{minipage}[h][8em][c]{\textwidth}
+		\centering%
+		\input{figures/frustration-ex}
+		\small{\captionof{figure}{\footnotesize Subgrafo Gerador Balanceado Máximo \textcolor{c1}{$E'$}.}}
+	\end{minipage}
+    \pause
+
+    \vspace{1em}
+    {\small\alert{O problema é \textbf{NP}-Difícil, pois é generalização do \textsc{Max-Cut}.}}
+\end{frame}
+
+\section{Formulação de PI para o MBSS}
+\subsection{Modelo XOR}
+\begin{frame}
+    \begin{block}{Modelo XOR [\cite{aref2020modeling}]}
+        \begingroup
+            \begin{center}
+                \footnotesize
+                $x_u=
+                \begin{cases}
+                    1, \text{\footnotesize se $u$ está na partição um}\\
+                    0, \text{\footnotesize c.c}
+                \end{cases}
+                \text{$,\forall u \in V$}
+                \;
+                y_{uv}=
+                \begin{cases}
+                    1, \text{\footnotesize se $uv$ é removida do subgrafo gerador}\\
+                    0, \text{\footnotesize c.c}
+                \end{cases}
+                \text{$, \forall uv \in E$}
+                $
+            \end{center}
+            \begin{align} 
+                 \min\:\:&\sum_{uv \in E} y_{uv} & & \\
+                \text{s.a}:\:&x_u-x_v \leq y_{uv} &\forall uv\in E^+ \label{eq:pos1}\\
+                &x_v-x_u \leq y_{uv} &\forall uv\in E^+ \label{eq:pos2}\\
+                &1 - x_u - x_v \leq y_{uv} &\forall uv\in E^- \label{eq:neg1}\\
+                & x_u+x_v -1 \leq y_{uv} &\forall uv\in E^- \label{eq:neg2}\\
+                &x_u \in \{0,1\} &\forall u \in V\\
+                &y_{uv} \in \{0,1\} &\forall uv \in E \label{eq:ybin}
+            \end{align}  
+        \endgroup
+    \end{block}
+\end{frame}
+
+\subsection{Desigualdade de ciclos negativos}
+\begin{frame}
+    Seja $C^-$ o conjunto de todos os ciclos negativos em $G$, então
+    \vspace{1em}
+    \begin{align}
+		\qquad \sum_{uv \in E(C)} y_{uv} \geq 1,\quad\forall C \in C^- \label{NEC}
+	\end{align}
+    é válida.
+
+    \pause
+    \vspace{1em}
+    {\alert{Número possivelmente exponencial de restrições!}}
+    
+\end{frame}
+
+\section{Desigualdades de cliques particionáveis}
+\subsection{Definição}
+\begin{frame}
+    
+    \begin{definition}[\cite{figueiredo2011exact}]
+        Seja $K$ uma clique e $S, \bar{S} = V(K)\setminus S$. $K$ é clique particionável se:
+        
+        \begin{itemize}
+            \item $E[S] \cup E[\bar{S}] = E^-(K)$;
+            \item $[S, \bar{S}] = E^+(K)$
+        \end{itemize}
+    \end{definition}
+
+    \vspace{2em}
+    \begin{minipage}[h][10em][c]{\textwidth}
+		\centering%
+		\input{figures/clique-part-ex.tex}
+        \vspace{1em}
+		\small{\captionof{figure}{\footnotesize Cliques particionáveis.}}
+	\end{minipage}
+    
+\end{frame}
+
+
+\section{Desigualdades de cliques particionáveis}
+\subsection{Desigualdades}
+\begin{frame}
+
+    \begin{itemize}
+        \item Inspiração em: An exact approach to the problem of extracting an embedded network matrix [\cite{figueiredo2011exact}];
+        \item Auxílio do software PORTA.
+    \end{itemize}
+
+    \pause
+    \begin{theorem}
+        Seja $K$ uma clique particionável em partições $S$ e $\bar S=V(K)\setminus S$, com $k=|V(K)|$. A desigualdade:
+        \begin{equation}\label{eq:ineq2}
+            -(k-3)\sum_{u \in S}x_u + (k-3)\sum_{v \in \bar{S}}x_v + \sum_{e \in E(K)}y_e \geq \frac{(k-1)(k-2)}{2} + (k-3)(1- |S|)
+        \end{equation}
+        é válida para $k \geq 2$
+    \end{theorem}
+
+    \pause
+    
+    \vspace{1em}
+    {\alert{Induz faceta no politopo da formulação XOR!}}
+    
+\end{frame}
+
+\section{Experimentos computacionais}
+
+\subsection{Algoritmo branch-and-cut}
+
+\begin{frame}
+    
+    Versão base: restrições XOR, fixando em 1 o valor da variável $x$ do vértice de maior grau. \\[1em]
+
+    \pause
+    
+    \begin{enumerate}
+        \item \textbf{NC}: Desigualdades de ciclos negativos disjuntos em arestas (priorizando triângulos);
+        \pause
+        \item \textbf{TRI}: Desigualdades de triângulos negativos como cortes adicionados pelo \textit{solver};
+        \pause
+        \item \textbf{K4}: Desigualdades de cliques particionáveis (tam. 4), seguindo os parâmetros $\epsilon, r, \kappa$;
+        \pause
+        \item \textbf{H}: Heurística de \cite{iacono2010determining} para fornecer uma solução inicial. 
+    \end{enumerate}
+    
+\end{frame}
+
+\subsection{Ambiente e instâncias}
+
+\begin{frame}
+
+    \begin{block}{Ambiente computacional}
+        \begin{itemize}
+            \item AMD Ryzen 5 5700G, 22 GB de RAM e S.O. Ubuntu 24.04 LTS;
+            \item Linguagem C++ e \textit{solver} \textit{IBM ILOG CPLEX 22.1.1};
+            \item Tamanho máximo da árvore B\&C = 20 GB;
+            \item Tempo máximo de execução do \textit{solver} = 1 hora.
+        \end{itemize}
+    \end{block}
+
+    \pause
+
+    \begin{block}{Instâncias}
+        \begin{itemize}
+            \item Instâncias aleatórias com parâmetros $n \in \{100,200\}$, $d \in \{30\%, 50\%, 70\%\}$, $p \in \{25\%, 50\%, 75\%\}$.
+        \end{itemize}       
+    \end{block}
+    
+\end{frame}
+
+\subsection{Resultados}
+
+\begin{frame}
+
+    \begin{figure}[h]
+        \includegraphics[width=\textwidth]{figures/gap_relaxacao.png}
+        \captionof{figure}{Resultados das instâncias de 100 e 200 vértices.}
+        \label{fig:figure2}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}
+
+    \begin{figure}[h]
+        \includegraphics[width=\textwidth]{figures/grafico_gaps_por_instancia.png}
+        \captionof{figure}{Resultados das instâncias de 100 e 200 vértices.}
+        \label{fig:figure2}
+    \end{figure}
+    
+\end{frame}
+
+\begin{frame}
+\begin{table}[h]
+\scriptsize
+% \renewcommand{\arraystretch}{0.9}
+% \setlength{\tabcolsep}{4pt}
+\label{tab:sint-200}
+\centering
+\begin{tabular}{l|l|rr|rr|rr|rr|rr|rr}
+\hline
+\multirow{2}{*}{$(n,d,p)$} & \multirow{2}{*}{i} & \multicolumn{2}{c|}{BASE+H} & \multicolumn{2}{c|}{NC+H} & \multicolumn{2}{c|}{NC+K4+H} & \multicolumn{2}{c|}{TRI+H} & \multicolumn{2}{c|}{TRI+NC+H} & \multicolumn{2}{c}{TRI+NC+K4+H} \\
+&  & Tempo & Gap & Tempo & Gap & Tempo & Gap & Tempo & Gap & Tempo & Gap \\
+\hline
+& 1 & TL & 73,23 & 11,39 & -- & 79,76 & -- & 6,46 & -- & \textbf{1,79} & -- & 2,29 & -- \\
+(200, 50\%, 25\%) & 2 & TL & 73,86 & 9,54 & -- & 75,17 & -- & 7,96 & -- & \textbf{1,63} & -- & 1,85 & -- \\
+& 3 & TL & 74,29 & 12,92 & -- & 160,77 & -- & 8,53 & -- & \textbf{1,71} & -- & 2,56 & -- \\
+\hline
+& 1 & TL & 85,97 &TL & 29,17 & TL & 30,31 & TL & 23,31 & TL & 23,31 & TL & \textbf{22,72} \\
+(200, 50\%, 50\%) & 2 & TL & 86,05& TL & 28,32 & TL & 29,17 & TL & 22,05 & TL & 22,05 & TL & \textbf{21,47} \\
+& 3 & TL & 86,08 & TL & 28,55 & TL & 29,61 & TL & 22,66 & TL & 22,66 & TL & \textbf{22,02} \\
+\hline
+& 1 & TL & 86,98 & TL & 29,31 & TL & 29,16 & TL & 23,21 & TL & 23,21 & TL & \textbf{22,64} \\
+(200, 50\%, 75\%) & 2 & TL & 87,32 & TL & 29,44 & TL & 29,49 & TL & 23,60 & TL & 23,62 & TL & \textbf{23,09} \\
+& 3 & TL & 86,11 & TL & 28,91 & TL & 28,68 & TL & 22,77 & TL & 22,77 & TL & \textbf{22,20} \\
+\hline
+& 1 & TL & 76,96 & 16,93 & -- & 358,67 & -- & 18,83 & -- & \textbf{3,08} & -- & 5,24 & -- \\
+(200, 70\%, 25\%) & 2 & TL & 76,96 & 15,38 & -- & 272,03 & -- & 17,67 & -- & \textbf{3,30} & -- & 5,20 & -- \\
+& 3 & TL & 77,28 & 21,13 & -- & 315,12 & -- & 19,48 & -- & \textbf{3,08} & -- & 6,19 & -- \\
+\hline
+& 1 & TL & 87,93 & TL & 28,86 & TL & 29,61 & TL & \textbf{24,32} & TL & 24,32 & TL & 26,96 \\
+(200, 70\%, 50\%) & 2 & TL & 88,11 & TL & 28,89 & TL & 29,56 & TL & 24,88 & TL & \textbf{24,59} & TL & 27,23 \\
+& 3 & TL & 87,89 & TL & 28,07 & TL & 28,76 & TL & \textbf{23,79} & TL & 26,05 & TL & 26,41 \\
+\hline
+& 1 & TL & 87,95 & TL & 29,04 & TL & 29,60 & TL & 25,00 & TL & \textbf{24,76} & TL & 27,35 \\
+(200, 70\%, 75\%) & 2 & TL & 88,12 & TL & 29,20 & TL & 29,87 & TL & 25,03 & TL & \textbf{24,82} & TL & 27,51 \\
+& 3 & TL & 88,04 & TL & 29,35 & TL & 30,10 & TL & 25,94 & TL & \textbf{25,07} & TL & 27,59 \\
+\hline
+\end{tabular}
+\caption{Resultados para instâncias sintéticas com 200 vértices, utilizando a heurística.}
+\end{table}    
+\end{frame}
+
+\begin{frame}
+    \begin{table}[h]
+    \label{tab:sint-200.2}
+    \centering
+    \begin{tabular}{l|l|rr}
+        \hline
+        \multirow{2}{*}{$(n,d,p)$} & \multirow{2}{*}{i} & \multicolumn{2}{c}{TRI+NC+K4+H} \\
+        &  & Tempo & Gap \\
+        \hline
+        & 1 & TL & \textbf{24,27} \\
+        (200, 70\%, 50\%) & 2 & TL & 26,95 \\
+        & 3 & TL & \textbf{25,99} \\
+        \hline
+        & 1 & TL & 27,28 \\
+        (200, 70\%, 75\%) & 2 & TL & \textbf{24,80} \\
+        & 3 & TL & \textbf{24,85} \\
+        \hline
+    \end{tabular}
+    \caption{Resultados para instâncias com 200 vértices com outros parâmetros para K4.}
+    \end{table}
+\end{frame}
+
+\section{}
+
+\begin{frame}{}{}
+    \vfill
+    \begin{center}
+    {\Large Obrigada!}
+    \end{center}
+
+    \vfill
+
+    \begin{figure}
+    \centering
+    \includegraphics[height=1.5cm]{figures/logopqno.png}\hspace{1cm}
+    \includegraphics[height=0.7cm]{figures/mdcc-cabecalho.png}\hspace{1cm}
+    \includegraphics[height=0.7cm]{figures/pargo.png}\hspace{1cm}
+    \includegraphics[height=0.7cm]{figures/funcap.png}\hspace{1cm}
+    \includegraphics[height=1.5cm]{figures/cnpq.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Referências}
+    \printbibliography
+\end{frame}
+
+\end{document}

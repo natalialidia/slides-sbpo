@@ -1,0 +1,47 @@
+\begin{tikzpicture}
+	\pgfsetlinewidth{1pt}
+
+    
+   
+    % Picture in Quadrant II
+    \only<2>{
+        
+        % Optional: draw a dotted ellipse to show partition groups
+        \node[text=black] (S) at (0, 1) {$S$};
+        \filldraw[fill=white, draw=black, thick] (0,0) ellipse (0.6 and 0.6);
+        % \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (3,0) ellipse (1 and 1.6);
+
+        \draw[draw, red] (A1) -- node [label, midway, above] {$-$} (A2);
+    
+    }
+
+    \only<3>{
+        
+            % Optional: draw a dotted ellipse to show partition groups
+        \node[text=black] (S) at (1, 1) {$S$};
+        \filldraw[fill=white, draw=black, thick] (1,0) ellipse (1.5 and 0.7);
+        
+
+        \draw[draw, red] (A1) -- node [label, midway, above] {$+$} (A2);
+    }
+
+    \only<4>{
+    
+        % Optional: draw a dotted ellipse to show partition groups
+        \node[text=black] (S) at (2, 1) {$S$};
+        \filldraw[fill=white, draw=black, thick] (2,0) ellipse (0.6 and 0.6);
+        % \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (3,0) ellipse (1 and 1.6);
+
+        \draw[draw, red] (A1) -- node [label, midway, above] {$-$} (A2);
+        
+    }
+
+    \node[vertex, label=$u$] (A1) at (0,0) {};
+    \node[vertex, label=$v$] (A2) at (2,0) {};
+    \only<1>{
+
+        \draw[draw] (A1) -- node [label, midway, above] {+} (A2);        
+            
+    }
+    
+\end{tikzpicture}

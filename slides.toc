@@ -1,0 +1,14 @@
+\beamer@sectionintoc {1}{Introdução\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 1}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Definições preliminares\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 1}{2}{0}{1}
+\beamer@subsectionintoc {1}{2}{Definição do problema\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 4}{6}{0}{1}
+\beamer@sectionintoc {2}{Formulação de PI para o MBSS\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 5}{9}{0}{2}
+\beamer@subsectionintoc {2}{1}{Modelo XOR\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 5}{9}{0}{2}
+\beamer@subsectionintoc {2}{2}{Desigualdade de ciclos negativos\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 6}{10}{0}{2}
+\beamer@sectionintoc {3}{Desigualdades de cliques particionáveis\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 7}{12}{0}{3}
+\beamer@subsectionintoc {3}{1}{Definição\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 7}{12}{0}{3}
+\beamer@sectionintoc {4}{Desigualdades de cliques particionáveis\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 8}{13}{0}{4}
+\beamer@subsectionintoc {4}{1}{Desigualdades\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 8}{13}{0}{4}
+\beamer@sectionintoc {5}{Experimentos computacionais\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 9}{16}{0}{5}
+\beamer@subsectionintoc {5}{1}{Algoritmo branch-and-cut\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 9}{16}{0}{5}
+\beamer@subsectionintoc {5}{2}{Ambiente e instâncias\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 10}{21}{0}{5}
+\beamer@subsectionintoc {5}{3}{Resultados\unhbox \voidb@x \cleaders \hbox to0.8em{\hss .\hss }\hfill \kern \z@ 11}{23}{0}{5}

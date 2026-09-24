@@ -1,0 +1,18 @@
+\begin{tikzpicture}[scale = 0.8, rounded corners=0.8em]
+	\pgfsetlinewidth{1pt}
+	% \tikzset{vertex/.style={circle, fill=black, minimum size=0.4em, inner sep=0.1em}};
+
+	\filldraw[fill=c1!20, draw=c1!90, dashed] (-2,0) rectangle (-0.75,2);
+	\filldraw[fill=c2!30, draw=c2!90, dashed] (0.75,0) rectangle (2,2);
+
+	\node (X) at (-1.4, 2.2) {$s$};
+	\node (Y) at (1.4, 2.2) {$(k-s)$};
+
+    \draw (-.75,1.8) edge node [midway, above] {--} (0.75,1.5);
+    \draw (-.75,1.2) edge node [midway, above] {--} (0.75,0.8);
+    \draw (-.75,0.6) edge node [midway, above] {--} (0.75,1.8);
+    % \draw (-.75,1.0) edge node [midway, above] {--} (0.75,0.5);
+    \draw (-.75,0.3) edge node [midway, above] {--} (0.75,.5);
+
+
+\end{tikzpicture}

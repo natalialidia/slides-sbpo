@@ -1,0 +1,30 @@
+  \begin{tikzpicture}[scale = 0.7, remember picture, overlay]
+    \pgfsetlinewidth{1pt}
+    % \tikzset{vertex/.style={circle, fill=black, minimum size=0.8em, inner sep=0.1em}};
+
+
+	{
+		\node[vertex] (c3) at (-1,1){};
+	}
+	{
+		\node[vertex] (c7) at (1,1){};
+	}
+	{
+		\node[vertex] (c5) at (-1,-1){};
+	}
+	{
+		\node[vertex] (c6) at (1,-1){};
+	}
+    \only<2->{
+        \node[vertex, text=white] (c3) at (-1,1){\tiny ?};
+        \node[vertex, fill=c1, draw=c1] (c7) at (1,1){};
+        \node[vertex, fill=c1, draw=c1] (c5) at (-1,-1){};
+        \node[vertex, fill=c2, draw=c2] (c6) at (1,-1){};
+    }
+    {
+        \draw (c3) edge node [label, midway, left] {--} (c5);
+		\draw (c5) edge node [label, midway, below] {--} (c6);
+		\draw (c6) edge node [label, midway, right] {--} (c7);
+		\draw (c7) edge node [label, midway, above] {+} (c3);
+	}
+  \end{tikzpicture}

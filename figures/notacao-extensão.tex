@@ -1,0 +1,37 @@
+% \input{figuras/tikz/preamble}
+\begin{tikzpicture}[scale = 0.8, draw=black, color=black]
+	\pgfsetlinewidth{1pt}
+
+    \begin{scope}[shift={(-7,0)}]
+    
+        \filldraw[fill=blue!30, draw=blue!90, dashed, rounded corners] (-2.25,0) rectangle (-0.75,2);
+        \filldraw[fill=red!30, draw=red!90, dashed, rounded corners] (0.75,0) rectangle (2.25,2.75);
+
+        \filldraw[fill opacity=0, draw=black, c1, dotted, rounded corners] (-2.15,0) rectangle (2.15,1.75);
+
+        \node[vertex] (c) at (1.5,2.5) {};
+
+        \node[vertex, label=left:$a$, c1] (a) at (-1.5,1.5) {};
+        \node[vertex, label=left:$b$, c1] (b) at (-1.5,0.25) {};
+        % \node[vertex] (c) at (-1.7,0.25) {};
+
+        \node[vertex, c1] (d) at (1.5,1.5) {};
+        \node[vertex, c1] (e) at (1.5,0.25) {};
+        % \node[vertex] (f) at (1.7,0.25) {};
+
+        \draw[c1] (a) edge node [midway, right] {+} (b);
+        \draw[dashed] (a) edge node [midway, above] {--} (c);
+        % \draw (b) edge node [midway, right] {+} (c);
+        \draw[dashed, c1] (d) edge node [midway, right] {--} (e);
+        % \draw[dashed] (d) edge node [midway, right] {--} (f);
+        % \draw (e) edge node [midway, left] {+} (f);
+
+        \draw[c1] (a) edge node [midway, below] {--} (d);
+        \draw[dashed, c1] (b) edge node [midway, below] {+} (d);
+        \draw[dashed] (c) edge node [midway, right] {+} (d);
+        
+        \draw[dashed, bend right=45] (b) edge node [midway, below] {--} (e);
+
+    \end{scope}    
+    
+\end{tikzpicture}

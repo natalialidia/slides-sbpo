@@ -1,0 +1,31 @@
+\begin{tikzpicture}[scale = 0.8]
+\pgfsetlinewidth{1pt}
+% \tikzset{vertex/.style={circle, fill=black, minimum size=0.8em, inner sep=0.1em, font=\tiny, text=white}};
+
+
+% \node[vertex] (c1) at (-3,0){};
+
+\node[vertex] (c2) at (-1,1){};
+
+\node[vertex] (c3) at (-1,-1){};
+
+\node[vertex] (c4) at (1,1){};
+
+\node[vertex] (c5) at (3,0){};
+
+\node[vertex] (c6) at (1,-1){};
+
+%    \node[text=c1] (E') at (0, -1.5) {\tiny $E'=\{ab, bc, ac, cd, df, ef\}$};
+% \node[text=c2] (F) at (0, -1.8) {\tiny $F = \{de\}$};
+
+% \draw (c1) edge[c1] node [label, midway, above left] {--} (c2);
+\draw (c2) edge[c1] node [label, midway, left] {--} (c3);
+\draw (c2) edge[c1] node [label, midway, above] {--} (c4);
+% \draw (c3) edge[c1]  node [label, midway, below] {+} (c1);
+\draw (c3) edge[c1] node [label, midway, below] {--} (c6);
+
+\draw (c4) edge[c1] node [label, midway, above right] {+} (c5);
+\draw (c5) edge[c1] node [label, midway, below right] {--} (c6);
+\draw (c6) edge[c2] node [label, midway, left] {+} (c4);
+
+\end{tikzpicture}
