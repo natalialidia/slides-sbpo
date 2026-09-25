@@ -1,0 +1,17 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'slides.blg'
+[66] biber:340> INFO - === sex set 25, 2026, 00:49:22
+[77] Biber.pm:418> INFO - Reading 'slides.bcf'
+[134] Biber.pm:972> INFO - Found 5 citekeys in bib section 0
+[144] Biber.pm:4383> INFO - Processing section 0
+[152] Biber.pm:4574> INFO - Looking for bibtex file 'references.bib' for section 0
+[153] bibtex.pm:1713> INFO - LaTeX decoding ...
+[180] bibtex.pm:1518> INFO - Found BibTeX data source 'references.bib'
+[236] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[236] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[236] Biber.pm:4203> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[236] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[241] bbl.pm:654> INFO - Writing 'slides.bbl' with encoding 'UTF-8'
+[243] bbl.pm:757> INFO - Output to slides.bbl
+[243] Biber.pm:130> WARN - BibTeX subsystem: /tmp/biber_tmp_O3CD/33e59b5ca9ec342068223d604c3f8d55_17350.utf8, line 333, warning: undefined macro "mars"
+[243] Biber.pm:132> INFO - WARNINGS: 1
